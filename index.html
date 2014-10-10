@@ -1,0 +1,185 @@
+<!Doctype html>
+<html>
+<head>
+    <title>Project 2 - Period 1</title>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+
+</head>
+<body id="demo">
+
+
+  <div class="container">
+
+    <div id="article">
+      <h1 class="header"> Tic Tac Toe</h1>
+
+      <div id="c0" class="r float_left box"><p></p></div>
+      <div id="c1" class="g float_left box"><p></p></div>
+      <div id="c2" class="b float_left box"><p></p></div>
+
+      <div class="clearboth"></div>
+      <div id="c3" class="r float_left box"><p></p></div>
+      <div id="c4" class="g float_left box"><p></p></div>
+      <div id="c5" class="b float_left box"><p></p></div>
+
+      <div class="clearboth"></div>
+      <div id="c6" class="r float_left box"><p></p></div>
+      <div id="c7" class="g float_left box"><p></p></div>
+      <div id="c8" class="b float_left box"><p></p></div>
+  </div>
+
+</div>
+
+<script>
+
+//step 1
+
+// mouse over
+
+
+
+//step 2
+
+// mouse out
+
+
+// These are the marks used on the board
+var marks = ["X", "O"];
+
+// Keep track of whose turn it is; starts at 0 because X goes first
+var markCounter = 0;
+
+// Get all the box elements on the page
+var boxes = document.getElementsByClassName("box");
+
+// Iterate through all the boxes
+for (var i = 0; i < boxes.length; i++) {
+
+  // Make the box light up when moused over
+  boxes[i].onmouseover = function() {
+      var that = this;
+
+      var oldColor = this.style.backgroundColor;
+      this.style.backgroundColor = "yellow";
+
+    // reset the color after a short delay
+    setTimeout(function() {
+        that.style.backgroundColor = "#FF00CC";
+
+    }, 1);
+
+    
+
+    setTimeout(function() {
+        that.style.backgroundColor = oldColor;
+        
+    }, 600);
+
+      // reset the color after a short delay
+      this.onmouseout = function() {
+        this.style.backgroundColor = oldColor;
+      }
+  };
+
+  // Fill in the appropriate mark when the box is clicked
+  boxes[i].onclick = function() {
+    var currentMark = marks[markCounter % 2];
+    this.firstChild.textContent = currentMark;
+
+    // Once a box has been clicked, it shouldn't react
+    // to clicks or mouseovers anymore.
+    this.onclick = null;
+    this.onmouseover = null;
+
+    // Check whether someone has won the game with this move
+    if (someoneHasWon()) {
+      winner(currentMark);
+
+    // If not, check whether the board is full, i.e. a draw
+    } else if (boardIsFull()) {
+      draw();
+    }
+
+    // Increment the mark counter to alternate between marks
+    markCounter++;
+  };
+
+}
+
+function areEqualAndNonEmpty(x, y, z) {
+  var boxes = document.getElementsByClassName("box");
+  var firstCell = boxes[x].firstChild.textContent;
+  var secondCell = boxes[y].firstChild.textContent;
+  var thirdCell = boxes[z].firstChild.textContent;
+
+  if (firstCell == "") {
+    return false;
+  }
+
+  if (firstCell == secondCell && secondCell == thirdCell) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function someoneHasWon() {
+  if (areEqualAndNonEmpty(0,1,2)) {
+    return true;
+  } else if (areEqualAndNonEmpty(3,4,5)) {
+    return true;
+  } else if (areEqualAndNonEmpty(6,7,8)) {
+    return true;
+  } else if (areEqualAndNonEmpty(0,3,6)) {
+    return true;
+  } else if (areEqualAndNonEmpty(1,4,7)) {
+    return true;
+  } else if (areEqualAndNonEmpty(2,5,8)) {
+    return true;
+  } else if (areEqualAndNonEmpty(0,4,8)) {
+    return true;
+  } else if (areEqualAndNonEmpty(2,4,6)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function boardIsFull() {
+  var boxes = document.getElementsByClassName("box");
+  for (var i = 0; i < boxes.length; i++) {
+    if (boxes[i].firstChild.textContent == "") {
+      return false;
+    }
+  }
+  return true;
+}
+
+function winner(winningMark) {
+  alert("The " + winningMark + " player has won! Congratulations!");
+
+  // Disable all mouseover and click events on the remaining boxes
+  var boxes = document.getElementsByClassName("box");
+  for (var i = 0; i < boxes.length; i++) {
+    boxes[i].onclick = null;
+    boxes[i].onmouseover = null;
+  }
+}
+
+function draw() {
+  alert("Drat! It's a draw. You're both losers.");
+}
+
+
+</script>    
+
+
+
+
+
+
+
+
+
+</body>
+</html>

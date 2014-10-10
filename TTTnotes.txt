@@ -1,0 +1,30 @@
+TTTnotes.txt
+
+
+Mouseover the box when it says "2":
+	
+	Keep track of what the box currently says. It says "2". Store this value and give it the name oldContent
+
+	Change the content of the box to "CAT". oldContent is still "2".
+
+	Schedule a function to be run in 200ms:
+
+		Change the content of the box back to oldContent ("2")
+
+		The box now contains "2"
+
+	Done.
+
+Mouseover the box when it says "CAT":
+
+	Keep track of what the box currently says. It says "CAT". Store this value and give it the name oldContent
+
+	Change the content of the box to "CAT". This does not result in a visual change, since the box *already* said "CAT". oldContent is still "CAT".
+
+	Schedule a function to be run in 200ms:
+
+		Change the content of the box back to oldContent ("CAT"). This does not result in a visual change, since the box *already* said "CAT".
+
+		The box now contains "CAT"
+
+	Done.
